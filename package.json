@@ -5,7 +5,6 @@
   "license": "MIT",
   "scripts": {
     "bump": "node ./scripts/bump_version",
-    "lint": "eslint www/base64ToGallery.js",
     "test": "npm run lint",
     "postversion": "npm run bump",
     "prepublish": "npm test"
