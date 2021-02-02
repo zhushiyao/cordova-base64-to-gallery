@@ -7,14 +7,14 @@
  * @license MIT
  */
 
-var exec = require('cordova/exec');
-var assign = require('./object.assign-polyfill');
+var exec = require("cordova/exec");
+var assign = require("./object.assign-polyfill");
 
 // Consts
-var SERVICE  = 'Base64ToGallery';
-var ACTION   = 'saveImageDataToLibrary';
-var ARGS     = ['data', 'prefix', 'mediaScanner'];
-var DEFAULTS = { prefix: 'img_', mediaScanner: true };
+var SERVICE = "Base64ToGallery";
+var ACTION = "saveImageDataToLibrary";
+var ARGS = ["data", "prefix", "mediaScanner"];
+var DEFAULTS = { prefix: "img_", mediaScanner: true };
 
 /**
  * @property indexFromArgs - Partially applied "indexFrom" method with ARGS constant.
@@ -31,12 +31,13 @@ var indexFromArgs = indexFrom.bind(null, ARGS);
  * @param  {function} [fail]
  * @return {undefined}
  */
-module.exports = function(data, options, success, fail) {
-  var spec       = assign(DEFAULTS, options);
+module.exports = function (data, options, success, fail) {
+  var spec = assign(DEFAULTS, options);
   var actionArgs = prepareArgs(spec);
 
   // Prepare base64 string
-  data = data.replace(/data:image\/png;base64,/, '');
+  // data = data.replace(/data:image\/png;base64,/, '');
+  data = data.replace(/^data:image\/(jpeg|png|jpg|bmp|gif);base64,/, "");
 
   // And add it to the Service's Action arguments
   actionArgs.unshift(data);
@@ -52,7 +53,7 @@ module.exports = function(data, options, success, fail) {
  * @return {function}
  */
 function ok(success) {
-  if (typeof success !== 'function') {
+  if (typeof success !== "function") {
     return console.log;
   }
 
@@ -67,7 +68,7 @@ function ok(success) {
  * @return {function}
  */
 function error(fail) {
-  if (typeof fail !== 'function') {
+  if (typeof fail !== "function") {
     return console.error;
   }
 
@@ -106,7 +107,7 @@ function valueFrom(fromObj, key) {
 function prepareArgs(opts) {
   var valueFromOpts = valueFrom.bind(null, opts);
 
-  return Object.keys(opts).reduce(function(acc, item) {
+  return Object.keys(opts).reduce(function (acc, item) {
     acc.splice(indexFromArgs(item), 0, valueFromOpts(item));
 
     return acc;

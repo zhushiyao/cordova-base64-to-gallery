@@ -1,4 +1,9 @@
+# Fork:
+
+## 修改保存的类型为 jpeg 格式
+
 # :warning: DISCONTINUED - Cordova base64ToGallery Plugin
+
 This plugin (based on [devgeeks/Canvas2ImagePlugin](http://github.com/devgeeks/Canvas2ImagePlugin)) allows you to save base64 data as a png image into the device (iOS Photo Library, Android Gallery or WindowsPhone 8 Photo Album).
 
 The plugin is a kind of fork of the [solderzzc/Base64ImageSaverPlugin](https://github.com/solderzzc/Base64ImageSaverPlugin) but with a cleaner history (a.k.a: no tags from Canvas2ImagePlugin repo) and a newer iOS implementation.
@@ -6,11 +11,13 @@ The plugin is a kind of fork of the [solderzzc/Base64ImageSaverPlugin](https://g
 ## Alerts
 
 ### Plugin id - [issue #1](https://github.com/Nexxa/cordova-base64-to-gallery/issues/1)
+
 In order to be more consistent with the cordova naming convention, since version 2.0 the repository name and the cordova plugin id have changed to **cordova-base64-to-gallery**.
 
 Please uninstall the old version and reinstall the new one.
 
 ### cordova-ios > 3.8.0 - [issue #3](https://github.com/Nexxa/cordova-base64-to-gallery/issues/3)
+
 According to the [documentation](https://github.com/apache/cordova-ios/blob/master/guides/API%20changes%20in%204.0.md#nsdatabase64h-removed), `NSData+Base64.h` class was removed starting from version 4.0.0 of the **cordova-ios platform** (and it was already deprecated from version 3.8.0).
 
 So, cordova-base64-to-gallery plugin **from version 3.0.0** has changed the iOS implementation in order to support the changes in cordova-ios platform.
@@ -18,26 +25,30 @@ So, cordova-base64-to-gallery plugin **from version 3.0.0** has changed the iOS 
 If you need to support cordova-ios < 3.8.0 please refer to [cordova-base64-to-gallery@2.0.2](https://github.com/Nexxa/cordova-base64-to-gallery/tree/2.0.2). There is also an "**old**" branch that might have some updates in the future (Android/WP8 fixes or something like that).
 
 ## Usage
+
 Call the `cordova.base64ToGallery()` method with image's base64 string, success and error callbacks (`options` is optional):
 
 ### Methods
+
 #### `cordova.base64ToGallery(data, [options, success, fail])`
 
-Param       | Type       | Default           | Description
------------ | ---------- | ----------------- | -----------------------------------------
-**data**    | *string*   |                   | base64 string
-**options** | *object*   | \*see below       | options
-**success** | *function* | **console.log**   | success callback (file path as parameter)
-**fail**    | *function* | **console.error** | fail callback (error as parameter)
+| Param       | Type       | Default           | Description                               |
+| ----------- | ---------- | ----------------- | ----------------------------------------- |
+| **data**    | _string_   |                   | base64 string                             |
+| **options** | _object_   | \*see below       | options                                   |
+| **success** | _function_ | **console.log**   | success callback (file path as parameter) |
+| **fail**    | _function_ | **console.error** | fail callback (error as parameter)        |
 
-#### Available options *
+#### Available options \*
 
 ##### `prefix`
+
 Saved file name prefix.
 
-**Default**: "img_"
+**Default**: "img\_"
 
 ##### `mediaScanner`
+
 On Android runs Media Scanner after file creation.
 
 On iOS if true the file will be added to camera roll, otherwise will be saved to a library folder.
@@ -48,26 +59,27 @@ On iOS if true the file will be added to camera roll, otherwise will be saved to
 
 ```javascript
 function onDeviceReady() {
-    cordova.base64ToGallery(
-        base64Data,
+  cordova.base64ToGallery(
+    base64Data,
 
-        {
-            prefix: 'img_',
-            mediaScanner: true
-        },
+    {
+      prefix: "img_",
+      mediaScanner: true,
+    },
 
-        function(path) {
-            console.log(path);
-        },
+    function (path) {
+      console.log(path);
+    },
 
-        function(err) {
-            console.error(err);
-        }
-    );
+    function (err) {
+      console.error(err);
+    }
+  );
 }
 ```
 
 ## Authors and contributors
+
 - [Tommy-Carlos Williams](http://github.com/devgeeks)
 - [Simba Zhang](http://github.com/solderzzc)
 - [StefanoMagrassi](http://github.com/StefanoMagrassi)

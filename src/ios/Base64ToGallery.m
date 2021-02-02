@@ -34,7 +34,7 @@
                 NSData *pngImageData = UIImagePNGRepresentation(image);
 
                 // image extension
-                NSString *imageExtension = @".png";
+                NSString *imageExtension = @".jpeg";
 
                 // get Timestamp
                 double currentTime = CACurrentMediaTime();
